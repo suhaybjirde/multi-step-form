@@ -7,7 +7,7 @@ type StepProps = {
 const Step = ({ step, title, isActive }: StepProps) => {
 
     return (
-        <div className="flex gap-3 items-center uppercase">
+        <div className="flex gap-3 items-center uppercase w-fit">
             <span className={`${isActive ? "bg-primary-200 text-primary-500 border-primary-200" : "text-white border-white"} rounded-full w-7 h-7 border flex items-center justify-center `}>{step}</span>
             <div>
                 <span className="text-sm text-neutral-300">step {step}</span>
