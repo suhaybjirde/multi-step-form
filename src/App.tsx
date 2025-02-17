@@ -18,6 +18,10 @@ function formReducer(state: FormFields, action: Actions): FormFields {
     return {...state, email: action.email}
   if ('phone' in action)
     return {...state, phone: action.phone}
+  if ('plan' in action)
+    return {...state, plan: action.plan}
+  if ('planTime' in action)
+    return {...state, planTime: action.planTime}
   return state
 }
 
@@ -48,7 +52,11 @@ function App() {
       dispatch={dispatch}
       validateField={validateField}
     />,
-    <StepTwo />,
+    <StepTwo 
+      plan={formData.plan}
+      dispatch={dispatch}
+      planTime={formData.planTime}
+    />,
   ]
 
   const length = steps.length - 1
@@ -69,7 +77,7 @@ function validateField(fieldName: keyof FormFields, value: string) {
 
   setError((prevErrors) => ({
     ...prevErrors,
-    [fieldName]: result.success ? { _errors: [] } : result.error.format(),
+    [fieldName]: result.success ? intailError : result.error.format(),
   }));
 }
 
