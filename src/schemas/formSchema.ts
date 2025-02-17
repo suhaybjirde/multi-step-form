@@ -9,7 +9,7 @@ export const formSchema = z.object({
         .min(10, 'Number must be at least 10 digits')
         .max(15, 'Number must be at most 15 digits')
         .regex(/^\d+$/, 'Only digits are allowed'),
-    plan: z.enum(['arcade', 'advance', 'pro']),
+    plan: z.enum(['arcade', 'advanced', 'pro']),
     planTime: z.enum(['monthly', 'yearly']),
     onlineService: z.boolean(),
     largeStorage: z.boolean(),
