@@ -1,12 +1,12 @@
-import { Actions } from "../App";
+import { FormDispatch } from "../App";
 import { FormFields } from "../schemas/formSchema";
-import { string, ZodFormattedError } from 'zod'
+import { ZodFormattedError } from 'zod'
 
 type stepOneProps = {
   name: string;
   email: string;
   phone: string;
-  dispatch: React.Dispatch<Actions>;
+  dispatch: FormDispatch;
   errors: ZodFormattedError<FormFields>;
   validateField: (field: keyof FormFields, value: string) => void;
 }

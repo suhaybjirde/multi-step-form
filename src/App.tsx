@@ -9,6 +9,8 @@ export type Actions = {
   [k in keyof FormFields]: {[P in k]: FormFields[k]}
 }[keyof FormFields]
 
+export type FormDispatch = React.Dispatch<Actions>;
+
 function formReducer(state: FormFields, action: Actions): FormFields {
   if ('name' in action)
     return {...state, name: action.name}
