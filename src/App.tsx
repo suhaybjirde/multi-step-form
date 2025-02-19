@@ -5,6 +5,7 @@ import StepTwo from "./components/StepTwo"
 import { FormFields, formSchema } from "./schemas/formSchema"
 import { ZodFormattedError } from "zod"
 import StepThree from "./components/StepThree"
+import StepFour from "./components/StepFour"
 
 export type Actions = {
   [k in keyof FormFields]: {[P in k]: FormFields[k]}
@@ -47,7 +48,7 @@ const intailState: FormFields = {
 const intailError = { _errors: []}
 function App() {
   const [formData, dispatch] = useReducer(formReducer, intailState)
-  const [currentStep, setCurrentIndex] = useState(2)
+  const [currentIndex, setCurrentIndex] = useState(3)
   const [error, setError] = useState<ZodFormattedError<FormFields>>(intailError)
   
   const steps = [
@@ -70,6 +71,14 @@ function App() {
       largeStorage={formData.largeStorage}
       onlineService={formData.onlineService}
       planTime={formData.planTime}
+    />,
+    <StepFour 
+      customizableProfile={formData.customizableProfile}
+      largeStorage={formData.largeStorage}
+      onlineService={formData.onlineService}
+      plan={formData.plan}
+      planTime={formData.planTime}
+      setCurrentIndex={setCurrentIndex}
     />
   ]
 
@@ -106,14 +115,14 @@ function validateField(fieldName: keyof FormFields, value: string) {
 
   return (
     <main className="rounded-lg p-3 bg-white w-full max-w-[850px] h-full">
-      <section className="flex min-h-[500px]">
-        <Aside currentIndex={currentStep}/>
+      <section className="flex min-h-[520px]">
+        <Aside currentIndex={currentIndex}/>
         <div className="p-10 basis-2/3">
           <form className="h-full relative" onSubmit={handleSubmit}>
-            {steps[currentStep]}
+            {steps[currentIndex]}
             <div className="flex bottom-0 absolute w-full">
-              {currentStep > 0 && <button onClick={goBack} type="button" className="font-bold text-neutral-400">Go Back</button>}
-              <button onClick={goNext} className="bg-primary-500 text-white p-2 rounded-md font-bold ml-auto">Next step</button>
+              {currentIndex > 0 && <button onClick={goBack} type="button" className="font-bold text-neutral-400">Go Back</button>}
+              {currentIndex == length ? <button className="bg-primary-400 text-white py-2 px-5 rounded-md font-bold ml-auto">Confirm</button> : <button onClick={goNext} className="bg-primary-500 text-white py-2 px-3 rounded-md font-bold ml-auto">Next Step</button>}
             </div>
           </form>
         </div>
