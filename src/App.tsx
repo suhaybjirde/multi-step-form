@@ -4,6 +4,7 @@ import StepOne from "./components/StepOne"
 import StepTwo from "./components/StepTwo"
 import { FormFields, formSchema } from "./schemas/formSchema"
 import { ZodFormattedError } from "zod"
+import StepThree from "./components/StepThree"
 
 export type Actions = {
   [k in keyof FormFields]: {[P in k]: FormFields[k]}
@@ -22,6 +23,12 @@ function formReducer(state: FormFields, action: Actions): FormFields {
     return {...state, plan: action.plan}
   if ('planTime' in action)
     return {...state, planTime: action.planTime}
+  if ('onlineService' in action)
+    return {...state, onlineService: action.onlineService}
+  if ('largeStorage' in action)
+    return {...state, largeStorage: action.largeStorage}
+  if ('customizableProfile' in action)
+    return {...state, customizableProfile: action.customizableProfile}
   return state
 }
 
@@ -40,9 +47,9 @@ const intailState: FormFields = {
 const intailError = { _errors: []}
 function App() {
   const [formData, dispatch] = useReducer(formReducer, intailState)
-  const [currentStep, setCurrentIndex] = useState(0)
+  const [currentStep, setCurrentIndex] = useState(2)
   const [error, setError] = useState<ZodFormattedError<FormFields>>(intailError)
-
+  
   const steps = [
     <StepOne 
       errors={error} 
@@ -57,6 +64,13 @@ function App() {
       dispatch={dispatch}
       planTime={formData.planTime}
     />,
+    <StepThree
+      customizableProfile={formData.customizableProfile}
+      dispatch={dispatch}
+      largeStorage={formData.largeStorage}
+      onlineService={formData.onlineService}
+      planTime={formData.planTime}
+    />
   ]
 
   const length = steps.length - 1
