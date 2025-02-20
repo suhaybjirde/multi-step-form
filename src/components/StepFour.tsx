@@ -45,7 +45,7 @@ const StepFour = ({
     const yearly = planTime == 'yearly'
     customizableProfile 
     return (
-        <div>
+        <div className=" min-h-[352px]">
             <h1 className="font-bold text-3xl text-primary-500">Finishing up</h1>
             <p className="text-neutral-400 py-2">Double-check everything looks OK before confirming</p>
             <ul className="mt-4 p-3 bg-neutral-100 rounded-md">
@@ -78,9 +78,9 @@ const StepFour = ({
                     />
                 }
             </ul>
-            <div className="flex items-center justify-between px-6">
+            <div className="flex items-center justify-between px-6 mt-7">
                 <p className="text-neutral-400 text-sm">Total (per {yearly ? 'year' : 'month'})</p>
-                <h3 className="font-bold text-primary-400 mt-7">{yearly? `+$${total}0/yr` : `+$${total}/mo`}</h3>
+                <h3 className="font-bold text-primary-400 ">{yearly? `+$${total}0/yr` : `+$${total}/mo`}</h3>
             </div>
         </div>
     )

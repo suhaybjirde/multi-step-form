@@ -19,7 +19,7 @@ const StepTwo = ({
     <div>
         <h1 className="font-bold text-3xl text-primary-500">Select your plan</h1>
         <p className="text-neutral-400 py-2">You have the option of montyly or yearly billing</p>
-        <div className='flex w-full gap-3 mt-10'>
+        <div className='flex w-full gap-3 mt-10  flex-col md:flex-row'>
           <PlanObtion
             img={arcadeIcon}
             onChange={()=> dispatch({plan: 'arcade'})}

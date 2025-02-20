@@ -114,18 +114,19 @@ function validateField(fieldName: keyof FormFields, value: string) {
 
   function handleSubmit(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     // submit
+    console.log(formData)
     setCurrentIndex(length)
   }
 
   return (
-    <main className="rounded-lg p-3 bg-white w-full max-w-[850px] h-full">
-      <section className="flex min-h-[520px]">
+    <main className="md:rounded-lg md:p-3 bg-white w-full md:max-w-[850px] h-full">
+      <section className="flex  flex-col md:flex-row md:min-h-[520px]">
         <Aside currentIndex={currentIndex}/>
-        <div className="p-10 basis-2/3">
+        <div className="md:h-[350px]  w-full  max-w-[440px] md:max-w-full p-10 md:basis-2/3  absolute md:relative md:top-1 md:left-1  bg-white  top-20  left-1/2 md:-translate-x-0 md:-translate-y-0  -translate-x-1/2  rounded-md md:rounded-none  min-h-[400px] md:min-h-[70vh]  shadow-md md:shadow-none">
           {lastIndex ? <Thanks /> : 
-          <form className="h-full relative">
+          <form className=" h-full min-h-full relative">
             {steps[currentIndex]}
-            <div className="flex bottom-0 absolute w-full">
+            <div className="flex  -bottom-32 py-4 md:-bottom-20 absolute w-full">
               {currentIndex > 0 && <button onClick={goBack} type="button" className="font-bold text-neutral-400">Go Back</button>}
               {currentIndex == length - 1 ? <button onClick={handleSubmit} type="button" className="bg-primary-400 text-white py-2 px-5 rounded-md font-bold ml-auto">Confirm</button> : <button type="button" onClick={goNext} className="bg-primary-500 text-white py-2 px-3 rounded-md font-bold ml-auto">Next Step</button>}
             </div>

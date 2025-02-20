@@ -8,6 +8,9 @@ export default {
     fontFamily: {
       Ubuntu: ["Ubuntu", 'sans-serif'],
     },
+    screens: {
+      md: '660px' 
+    },
     colors: {
       "white": "hsl(0, 0%, 100%)",
       "primary": {

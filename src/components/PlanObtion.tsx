@@ -18,7 +18,7 @@ const PlanObtion = ({
   return (
     <label htmlFor={value} className="basis-1/3 cursor-pointer">
         <input checked={plan == value} onChange={onChange} className="peer sr-only" type="radio" name="plan" id={value} />
-        <div className="peer-focus-visible:border-primary-400 h-[170px] p-4 flex flex-col border border-neutral-300 rounded-md peer-checked:border-primary-400">
+        <div className="peer-focus-visible:border-primary-400 md:h-[170px] p-4 flex  flex-row md:flex-col  gap-3 md:gap-0 border border-neutral-300 rounded-md peer-checked:border-primary-400">
             <img className='self-start' src={img} alt={`$${value} icon`} />
             <span className='mt-auto'>
                 <h3 className="font-bold text-primary-500">{value}</h3>
