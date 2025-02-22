@@ -138,7 +138,7 @@ function App() {
           <form className=" h-full min-h-full relative" onSubmit={handleSubmit}>
             {steps[currentIndex]}
             <div className="flex  -bottom-32 py-4 md:-bottom-20 absolute w-full">
-              {currentIndex > 0 && <button onClick={goBack} type="button" className="font-bold text-neutral-400">Go Back</button>}
+              {currentIndex > 0 && <button onClick={goBack} type="button" className="font-bold text-neutral-400 hover:text-primary-500">Go Back</button>}
               {currentIndex == length - 1 ? <button className="bg-primary-400 text-white py-2 px-5 rounded-md font-bold ml-auto">Confirm</button> : <button className="bg-primary-500 text-white py-2 px-3 rounded-md font-bold ml-auto">Next Step</button>}
             </div>
           </form>}
