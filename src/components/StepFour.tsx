@@ -43,7 +43,7 @@ const StepFour = ({
 }: StepFourProps) => {
     const total = calculateTotal(customizableProfile, largeStorage, onlineService, plan)
     const yearly = planTime == 'yearly'
-    customizableProfile 
+
     return (
         <div className=" min-h-[352px]">
             <h1 className="font-bold text-3xl text-primary-500">Finishing up</h1>
