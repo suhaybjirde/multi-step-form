@@ -11,6 +11,32 @@ export default {
     screens: {
       md: '660px' 
     },
+    animation:{
+      rightToLeftFade: 'rightToLeftFade 500ms linear forwards',
+      leftToRightFade: 'leftToRightFade 500ms linear forwards',
+    },
+    keyframes: {
+      rightToLeftFade: {
+        '0%': {
+          opacity: '0',
+          transform: 'translateX(10%)'
+        },
+        '100%': {
+          opacity: '1',
+          transform: 'translateX(0%)'
+        }
+      },
+      leftToRightFade: {
+        '0%': {
+          opacity: '0',
+          transform: 'translateX(-10%)'
+        },
+        '100%': {
+          opacity: '1',
+          transform: 'translateX(0%)'
+        }
+      }
+    },
     colors: {
       "white": "hsl(0, 0%, 100%)",
       "primary": {

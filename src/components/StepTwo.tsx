@@ -4,25 +4,30 @@ import arcadeIcon from '../assets/images/icon-arcade.svg'
 import proIcon from '../assets/images/icon-pro.svg'
 import { FormFields } from '../schemas/formSchema'
 import PlanObtion from './PlanObtion'
+import SliderAnimation from './SliderAnimation'
 import Switch from './Switch'
 
 type StepTwoProps = Pick<FormFields, 'plan' | 'planTime'> & {
   dispatch: FormDispatch;
+  currentIndex: number;
+  prevIndex: number;
 }
   
 const StepTwo = ({
   plan,
   planTime,
-  dispatch
+  dispatch,
+  currentIndex,
+  prevIndex
 }: StepTwoProps) => {
   return (
-    <div>
+    <SliderAnimation prevIndex={prevIndex} currentIndex={currentIndex}>
         <h1 className="font-bold text-3xl text-primary-500">Select your plan</h1>
         <p className="text-neutral-400 py-2">You have the option of montyly or yearly billing</p>
         <div className='flex w-full gap-3 mt-10  flex-col md:flex-row'>
           <PlanObtion
             img={arcadeIcon}
-            onChange={()=> dispatch({plan: 'arcade'})}
+            dispatch={dispatch}
             plan={plan}
             planTime={planTime}
             value='arcade'
@@ -30,7 +35,7 @@ const StepTwo = ({
           />
           <PlanObtion
             img={advanceIcon}
-            onChange={()=> dispatch({plan: 'advanced'})}
+            dispatch={dispatch}
             plan={plan}
             planTime={planTime}
             value='advanced'
@@ -38,7 +43,7 @@ const StepTwo = ({
           />
           <PlanObtion
             img={proIcon}
-            onChange={()=> dispatch({plan: 'pro'})}
+            dispatch={dispatch}
             plan={plan}
             planTime={planTime}
             value='pro'
@@ -53,7 +58,7 @@ const StepTwo = ({
           />
           <p className={`font-bold ${planTime == 'yearly' ? 'text-primary-500' : 'text-neutral-400'} font-bold`}>Yearly</p>
         </div>
-    </div>
+    </SliderAnimation>
   )
 }
 

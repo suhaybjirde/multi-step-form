@@ -1,7 +1,10 @@
 import { FormFields } from "../schemas/formSchema"
+import SliderAnimation from "./SliderAnimation";
 
 type StepFourProps = Pick<FormFields, 'plan' | 'planTime' | 'customizableProfile' | 'largeStorage' | 'onlineService'> & {
     setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
+    prevIndex: number;
+    currentIndex: number
 }
 
 const LiElement = ({
@@ -39,50 +42,54 @@ const StepFour = ({
     largeStorage,
     onlineService,
     plan,
-    planTime
+    planTime,
+    prevIndex,
+    currentIndex
 }: StepFourProps) => {
     const total = calculateTotal(customizableProfile, largeStorage, onlineService, plan)
     const yearly = planTime == 'yearly'
 
     return (
-        <div className=" min-h-[352px]">
-            <h1 className="font-bold text-3xl text-primary-500">Finishing up</h1>
-            <p className="text-neutral-400 py-2">Double-check everything looks OK before confirming</p>
-            <ul className="mt-4 p-3 bg-neutral-100 rounded-md">
-                <li className="flex justify-between items-center p-2 border-b border-neutral-200">
-                    <div>
-                        <h2 className="capitalize font-bold text-primary-500">{plan} ({planTime})</h2>
-                        <button type="button" className="text-neutral-400 underline" onClick={()=> setCurrentIndex(2)}>Change</button>
-                    </div>
-                    <p className="font-bold text-primary-500 ">{yearly ? `$${planPrices[plan]}0/yr` : `$${planPrices[plan]}/mo`}</p>
-                </li>
-                {onlineService && 
-                    <LiElement 
-                        price={1} 
-                        title='Online service' 
-                        yearly={yearly} 
-                    />
-                }
-                {largeStorage && 
-                    <LiElement 
-                        price={2} 
-                        title='Larger storage' 
-                        yearly={yearly} 
-                    />
-                }
-                {customizableProfile && 
-                    <LiElement 
-                        price={2} 
-                        title='Customizable profile' 
-                        yearly={yearly} 
-                    />
-                }
-            </ul>
-            <div className="flex items-center justify-between px-6 mt-7">
-                <p className="text-neutral-400 text-sm">Total (per {yearly ? 'year' : 'month'})</p>
-                <h3 className="font-bold text-primary-400 ">{yearly? `+$${total}0/yr` : `+$${total}/mo`}</h3>
+        <SliderAnimation currentIndex={currentIndex} prevIndex={prevIndex}>
+            <div className="sm:min-h-[352px]">
+                <h1 className="font-bold text-3xl text-primary-500">Finishing up</h1>
+                <p className="text-neutral-400 py-2">Double-check everything looks OK before confirming</p>
+                <ul className="mt-4 p-3 bg-neutral-100 rounded-md">
+                    <li className="flex justify-between items-center p-2 border-b border-neutral-200">
+                        <div>
+                            <h2 className="capitalize font-bold text-primary-500">{plan} ({planTime})</h2>
+                            <button type="button" className="text-neutral-400 underline" onClick={()=> setCurrentIndex(1)}>Change</button>
+                        </div>
+                        <p className="font-bold text-primary-500 ">{yearly ? `$${planPrices[plan]}0/yr` : `$${planPrices[plan]}/mo`}</p>
+                    </li>
+                    {onlineService && 
+                        <LiElement 
+                            price={1} 
+                            title='Online service' 
+                            yearly={yearly} 
+                        />
+                    }
+                    {largeStorage && 
+                        <LiElement 
+                            price={2} 
+                            title='Larger storage' 
+                            yearly={yearly} 
+                        />
+                    }
+                    {customizableProfile && 
+                        <LiElement 
+                            price={2} 
+                            title='Customizable profile' 
+                            yearly={yearly} 
+                        />
+                    }
+                </ul>
+                <div className="flex items-center justify-between px-6 mt-7">
+                    <p className="text-neutral-400 text-sm">Total (per {yearly ? 'year' : 'month'})</p>
+                    <h3 className="font-bold text-primary-400 ">{yearly? `+$${total}0/yr` : `+$${total}/mo`}</h3>
+                </div>
             </div>
-        </div>
+        </SliderAnimation>
     )
 }
 

@@ -7,6 +7,7 @@ import { ZodFormattedError } from "zod"
 import StepThree from "./components/StepThree"
 import StepFour from "./components/StepFour"
 import Thanks from "./components/Thanks"
+import usePrev from "./hooks/usePrevState"
 
 export type Actions = {
   [k in keyof FormFields]: {[P in k]: FormFields[k]}
@@ -51,6 +52,7 @@ function App() {
   const [formData, dispatch] = useReducer(formReducer, intailState)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [error, setError] = useState<ZodFormattedError<FormFields>>(intailError)
+  const prevIndex = usePrev(currentIndex)
   
   const steps = [
     <StepOne 
@@ -60,11 +62,15 @@ function App() {
       phone={formData.phone} 
       dispatch={dispatch}
       validateField={validateField}
+      currentIndex={currentIndex}
+      prevIndex={prevIndex}
     />,
     <StepTwo 
       plan={formData.plan}
       dispatch={dispatch}
       planTime={formData.planTime}
+      currentIndex={currentIndex}
+      prevIndex={prevIndex}
     />,
     <StepThree
       customizableProfile={formData.customizableProfile}
@@ -72,6 +78,8 @@ function App() {
       largeStorage={formData.largeStorage}
       onlineService={formData.onlineService}
       planTime={formData.planTime}
+      prevIndex={prevIndex}
+      currentIndex={currentIndex}
     />,
     <StepFour 
       customizableProfile={formData.customizableProfile}
@@ -80,6 +88,8 @@ function App() {
       plan={formData.plan}
       planTime={formData.planTime}
       setCurrentIndex={setCurrentIndex}
+      prevIndex={prevIndex}
+      currentIndex={currentIndex}
     />,
     <Thanks />
   ]

@@ -1,6 +1,7 @@
 import { FormDispatch } from "../App";
 import { FormFields } from "../schemas/formSchema";
 import { ZodFormattedError } from 'zod'
+import SliderAnimation from "./SliderAnimation";
 
 type stepOneProps = {
   name: string;
@@ -9,6 +10,8 @@ type stepOneProps = {
   dispatch: FormDispatch;
   errors: ZodFormattedError<FormFields>;
   validateField: (field: keyof FormFields, value: string) => void;
+  prevIndex: number;
+  currentIndex: number;
 }
 
 const StepOne = ({
@@ -17,11 +20,13 @@ const StepOne = ({
   phone,
   dispatch,
   errors, 
-  validateField
+  validateField,
+  prevIndex,
+  currentIndex
 }:stepOneProps) => {
 
   return (
-    <div>
+    <SliderAnimation prevIndex={prevIndex} currentIndex={currentIndex}>
         <h1 className="font-bold text-3xl text-primary-500">Personal Info</h1>
         <p className="text-neutral-400 py-2">Please provide your name, email and phone number.</p>
         <div className="my-5 group">
@@ -36,7 +41,7 @@ const StepOne = ({
             <span className="flex justify-between"><label htmlFor="phone" className="text-primary-500">Phone Number *</label> {errors.phone?._errors && <span className="text-primary-100 font-semibold text-sm group-focus-within:hidden text-right">{errors.phone._errors[0]}</span>}</span>
             <input value={phone} onBlur={() => validateField('phone', phone)} onChange={(e)=> dispatch({phone: e.target.value})} type="text" name="phone" id="phone" placeholder="e.g. +1 234 567 890" autoComplete="off" className={`border ${errors.phone?._errors[0]  ? "border-primary-100" : "border-neutral-300" } mt-1 w-full p-2 rounded-md focus:outline-none focus:border-primary-400`}/>
         </div>
-    </div>
+    </SliderAnimation>
   )
 }
 

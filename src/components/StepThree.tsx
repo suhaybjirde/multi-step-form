@@ -1,9 +1,12 @@
 import { FormDispatch } from "../App"
 import { FormFields } from "../schemas/formSchema"
 import CheckBox from "./CheckBox"
+import SliderAnimation from "./SliderAnimation";
 
 type StepThreeProps = Pick<FormFields, 'customizableProfile' | 'largeStorage' | 'onlineService' | 'planTime'> & {
   dispatch: FormDispatch;
+  prevIndex: number;
+  currentIndex: number
 }
 
 const StepThree = ({
@@ -11,10 +14,12 @@ const StepThree = ({
   dispatch,
   largeStorage,
   onlineService,
-  planTime
+  planTime,
+  prevIndex,
+  currentIndex
 }: StepThreeProps) => {
   return (
-    <div>
+    <SliderAnimation prevIndex={prevIndex} currentIndex={currentIndex}>
         <h1 className="font-bold text-3xl text-primary-500">Pick add-ons</h1>
         <p className="text-neutral-400 py-2">Add-ons help enhance your gaming experience</p>
         <div className="mt-4 grid gap-4">
@@ -46,7 +51,7 @@ const StepThree = ({
             onChange={(e)=> dispatch({customizableProfile: e.target.checked})}
           />
         </div>
-    </div>
+    </SliderAnimation>
   )
 }
 
